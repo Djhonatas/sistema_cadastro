@@ -1,0 +1,59 @@
+#importando sqlite
+import sqlite3 as lite
+
+#criando conexão
+con = lite.connect('dados.db')
+
+dados = ['sofá', 'sala de estar', 'impermeavel', 'abcd', '05/04/2024', '1.500', 'cara', 'c:imagens']
+
+
+#inserir dados
+with con:
+  cur=con.cursor()
+  query = "INSERT INTO inventario (nome, local, descricao, marca, data_da_compra, valor_da_compra, serie, imagem) VALUES (?,?,?,?,?,?,?,?)"
+  cur.execute(query, dados)
+
+
+#atualizar dados
+atualizar_dados =['sofa', 'sala de estar', 'impermeavel', 'abcd', '05/04/2024', '1.500', 'cara', 'c:imagens', 3]
+
+with con:
+  cur=con.cursor()
+  query = "UPDATE inventario set nome =?, local=?, descricao=?, marca=?, data_da_compra=?, valor_da_compra=?, serie=?, imagem=? WHERE id=?"
+  cur.execute(query, atualizar_dados)
+
+
+#deletar dados
+deletar_dados = str(2)
+with con:
+  cur=con.cursor()
+  query = "delete FROM inventario WHERE id=?"
+  cur.execute(query, deletar_dados)
+
+
+ver_dados =[]
+
+  #ver dados
+with con:
+  cur=con.cursor()
+  query = "SELECT * FROM inventario"
+  cur.execute(query)
+
+  rows = cur.fetchall()
+  for row in rows:
+    ver_dados.append(row)
+
+print(ver_dados)
+
+
+ver_dados_individual =[]
+id = 0
+  #ver dados
+with con:
+  cur=con.cursor()
+  query = "SELECT * FROM inventario WHERE id=?"
+  cur.execute(query, id)
+
+  rows = cur.fetchall()
+  for row in rows:
+    ver_dados_individual.append(row)
