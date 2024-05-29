@@ -13,7 +13,7 @@ def inserir_form(i):
     cur.execute(query, i)
 
 #atualizar dados
-def atualizar_(i):
+def atualizar_form(i):
   with con:
     cur=con.cursor()
     query = "UPDATE inventario set nome =?, local=?, descricao=?, marca=?, data_da_compra=?, valor_da_compra=?, serie=?, imagem=? WHERE id=?"
@@ -37,7 +37,7 @@ def ver_form():
     rows = cur.fetchall()
     for row in rows:
       ver_dados.append(row)
-  return ver_dados
+  return rows
 
 #ver dados
 def ver_item(id):
@@ -50,3 +50,4 @@ def ver_item(id):
     rows = cur.fetchall()
     for row in rows:
       ver_dados_individual.append(row)
+  return ver_dados_individual
